@@ -37,6 +37,21 @@ export default function SearchableServerList({ servers }: { servers: MCPServer[]
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <div className='mt-5 text-sm ml-5'>
+            <p>Filter by</p>
+            <div>
+                <input type="checkbox" />
+                <label className='ml-2'>Streamable HTTP</label>
+            </div>
+            <div>
+                <input type="checkbox" />
+                <label className='ml-2'>SSE</label>
+            </div>
+            <div>
+                <input type="checkbox" />
+                <label className='ml-2'>Local Only</label>
+            </div>
+        </div>
       </div>
       <div className='col-span-12 sm:col-span-8'>
         <h1 className="text-xl bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
