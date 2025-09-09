@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Spekter",
     images: [
       {
-        url: "https://www.spekter.io/spekter.png",
+        url: "/spekter.png",
         width: 1200,
         height: 630,
         alt: "Spekter - Access the official MCP Server Registry",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Spekter - Access the official MCP Server Registry",
     description: "A comprehensive list of all MCP servers in the official Model Context Protocol registry. Discover and explore available MCP servers for your projects.",
-    images: ["https://www.spekter.io/spekter.png"],
+    images: ["/spekter.png"],
     creator: "@zlatoidsky", // Replace with your Twitter handle
   },
   robots: {
