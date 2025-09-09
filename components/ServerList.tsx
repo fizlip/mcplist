@@ -16,7 +16,7 @@ interface MCPServer {
   repository: Repository;
 }
 
-export default function ServerList({ list, filter }: { list: MCPServer[], filter?: string }) {
+export default function ServerList({ list, filter, customFilter }: { list: MCPServer[], filter?: string, customFilter?: { streamableHttp?: boolean, sse?: boolean, localOnly?: boolean }}) {
     return (
         <div>
           <p>{filter}</p>

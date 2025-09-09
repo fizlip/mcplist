@@ -22,10 +22,24 @@ interface MCPServer {
 export default function SearchableServerList({ servers }: { servers: MCPServer[] }) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredServers = servers.filter(server =>
+  const [filter, setFilter] = useState({streamableHttp: false, sse: false, localOnly: false})
+
+  let filteredServers = servers.filter(server =>
     server.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     server.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if(filter.streamableHttp){
+    filteredServers = filteredServers.filter(server => server.remotes?.some(remote => remote.type === 'streamable-http'));
+  }
+
+  if(filter.sse){
+    filteredServers = filteredServers.filter(server => server.remotes?.some(remote => remote.type == "sse"));
+  }
+
+  if(filter.localOnly){
+    filteredServers = filteredServers.filter(server => !server.remotes || server.remotes.length === 0);
+  }
 
   return (
     <>
@@ -40,15 +54,27 @@ export default function SearchableServerList({ servers }: { servers: MCPServer[]
         <div className='mt-5 text-sm ml-5'>
             <p>Filter by</p>
             <div>
-                <input type="checkbox" />
+                <input 
+                  type="checkbox" 
+                  checked={filter.streamableHttp}
+                  onChange={(e) => setFilter({ ...filter, streamableHttp: e.target.checked})}
+                />
                 <label className='ml-2'>Streamable HTTP</label>
             </div>
             <div>
-                <input type="checkbox" />
+                <input 
+                  type="checkbox" 
+                  checked={filter.sse}
+                  onChange={(e) => setFilter({ ...filter, sse: e.target.checked })}
+                />
                 <label className='ml-2'>SSE</label>
             </div>
             <div>
-                <input type="checkbox" />
+                <input 
+                  type="checkbox" 
+                  checked={filter.localOnly}
+                  onChange={(e) => setFilter({ ...filter, localOnly: e.target.checked })}
+                />
                 <label className='ml-2'>Local Only</label>
             </div>
         </div>
@@ -59,7 +85,7 @@ export default function SearchableServerList({ servers }: { servers: MCPServer[]
           {searchTerm && ` (filtered from ${servers.length})`}
         </h1>
         <div className='mt-5 border-t border-t-[#cccccc] border-b border-b-[#cccccc] text-sm'>
-          <ServerList list={filteredServers} filter={searchTerm} />
+          <ServerList list={filteredServers} filter={searchTerm} customFilter={filter} />
         </div>
       </div>
     </>
