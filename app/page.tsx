@@ -45,7 +45,7 @@ export default async function Home() {
           </select>
           <div className="mt-4 p-1 bg-[#f4f4f4] border border-[#cccccc]">
             <h3 className="text-xs font-bold mb-2">Server count</h3>
-            <D3LineChart data={[17, 27, 34]} height={50} />
+            <D3LineChart data={[17, 27, 39]} height={50} />
           </div>
         </div>
         <a className='flex text-xs underline fixed bottom-2 right-2' target="_blank" href="https://github.com/fizlip/mcplist">github</a>
