@@ -1,5 +1,6 @@
 import SearchableServerList from '@/components/SearchableServerList';
 import D3LineChart from '../components/D3LineChart';
+import { Github } from 'lucide';
 
 interface Remote {
   type: string;
@@ -47,9 +48,8 @@ export default async function Home() {
             <D3LineChart data={[17, 27, 33]} height={50} />
           </div>
         </div>
+        <a className='flex text-xs underline fixed bottom-2 right-2' target="_blank" href="https://github.com/fizlip/mcplist">github</a>
       </main>
-      <footer className="">
-      </footer>
     </div>
   );
 }
