@@ -33,13 +33,17 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="">
-      <main className="flex m-auto w-full">
-        <div className='m-auto'>
-          <h1 className="text-2xl mb-5 border-b">A list of all MCP servers in the official MCP registry</h1>
-          <div>
+    <div className="flex w-[75vw] mx-auto mt-5">
+      <main className="grid grid-cols-12 gap-5">
+        <div className='col-span-3 bg-[#f4f4f4] border-b border-t flex flex-col'>
+          <h1 className="text-xl mx-auto font-serif">MCPList</h1>
+          <input className="w-[90%] bg-white mx-auto text-xs border rounded-md p-1" placeholder="Search" />
+        </div>
+        <div className='col-span-8'>
+          <h1 className="text-xl bg-[#f4f4f4] border-t border-b">{list.length} servers available</h1>
+          <div className='mt-5 border-t border-b text-sm'>
             {list.length === 0 ? (
-              <div className="flex justify-center items-center py-8">
+              <div className="py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
                 <span className="ml-3">Loading MCP servers...</span>
               </div>
@@ -48,14 +52,20 @@ export default function Home() {
                 return (
                   <div key={i} className='mb-5'>
                     <p className='font-bold'>{e.name}</p>
+                    <a className='text-blue-500 underline' href={e.repository.url} target="_blank" rel="noopener noreferrer">{e.repository.url}</a>
                     <p>{e.description}</p>
                     <div>{e.remotes?.map((x: Remote) => <div key={x.type}><span>{x.type}</span>: <a className='text-blue-500 underline' href={x.url} target="_blank" rel="noopener noreferrer">{x.url}</a></div>)}</div>
-                    <a className='text-blue-500 underline' href={e.repository.url} target="_blank" rel="noopener noreferrer">{e.repository.url}</a>
                   </div>
                 )
               })
             )}
           </div>
+          
+        </div>
+        <div className='col-span-1'>
+          <select className="text-xs bg-[#f4f4f4] border-t border-b">
+            <option>English</option>
+          </select>
         </div>
       </main>
       <footer className="">
