@@ -34,13 +34,13 @@ export default async function Home() {
   const servers = await getServers();
 
   return (
-    <div className="flex w-[75vw] mx-auto mt-5 mb-5">
+    <div className="flex w-[90vw] sm:w-[75vw] mx-auto mt-5 mb-5">
       <main className="grid grid-cols-12 gap-5">
-        <div className='col-span-3 bg-[#f4f4f4] border-b border-b-[#cccccc] border-t border-t-[#cccccc] flex flex-col'>
+        <div className='col-span-12 sm:col-span-3 bg-[#f4f4f4] border-b border-b-[#cccccc] border-t border-t-[#cccccc] flex flex-col'>
           <h1 className="text-xl mx-auto font-serif">spekter</h1>
           <input className="w-[90%] bg-white mx-auto text-xs border border-[#cccccc] rounded-md p-1" placeholder="Search" />
         </div>
-        <div className='col-span-8'>
+        <div className='col-span-12 sm:col-span-8'>
           <h1 className="text-xl bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">{servers.length} servers available</h1>
           <div className='mt-5 border-t border-t-[#cccccc] border-b border-b-[#cccccc] text-sm'>
             {servers.map((e: MCPServer, i: number) => {
@@ -56,7 +56,7 @@ export default async function Home() {
           </div>
           
         </div>
-        <div className='col-span-1'>
+        <div className='hidden sm:block col-span-1'>
           <select className="text-xs bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
             <option>English</option>
           </select>
