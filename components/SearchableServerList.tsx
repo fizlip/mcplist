@@ -75,7 +75,7 @@ export default function SearchableServerList({ servers }: { servers: MCPServer[]
                   checked={filter.localOnly}
                   onChange={(e) => setFilter({ ...filter, localOnly: e.target.checked })}
                 />
-                <label className='ml-2'>Local Only</label>
+                <label className='ml-2'>Local</label>
             </div>
         </div>
       </div>
