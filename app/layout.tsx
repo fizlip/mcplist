@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Spekter - Access the official MCP Server Registry",
+  title: "Find MCP Servers",
   description: "A comprehensive list of all MCP servers in the official Model Context Protocol registry. Discover and explore available MCP servers for your projects.",
   keywords: ["MCP", "Model Context Protocol", "servers", "registry", "AI", "tools"],
   authors: [{ name: "Spekter" }],
