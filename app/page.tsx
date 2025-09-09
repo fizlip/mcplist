@@ -20,7 +20,7 @@ async function getServers(): Promise<MCPServer[]> {
   try {
     const response = await fetch("https://registry.modelcontextprotocol.io/v0/servers", {
       cache: 'force-cache', // Cache the response
-      next: { revalidate: 3600 } // Revalidate every hour
+      next: { revalidate: 60*5} // Revalidate five mins 
     });
     const data = await response.json();
     return data.servers || [];
@@ -62,7 +62,7 @@ export default async function Home() {
           </select>
           <div className="mt-4 p-1 bg-[#f4f4f4] border border-[#cccccc]">
             <h3 className="text-xs font-bold mb-2">Server count</h3>
-            <D3LineChart data={[17, 27]} height={50} />
+            <D3LineChart data={[17, 27, 29]} height={50} />
           </div>
         </div>
       </main>
