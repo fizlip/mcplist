@@ -36,13 +36,13 @@ export default async function Home() {
   return (
     <div className="flex w-[75vw] mx-auto mt-5 mb-5">
       <main className="grid grid-cols-12 gap-5">
-        <div className='col-span-3 bg-[#f4f4f4] border-b border-t flex flex-col'>
+        <div className='col-span-3 bg-[#f4f4f4] border-b border-b-[#cccccc] border-t border-t-[#cccccc] flex flex-col'>
           <h1 className="text-xl mx-auto font-serif">spekter</h1>
-          <input className="w-[90%] bg-white mx-auto text-xs border rounded-md p-1" placeholder="Search" />
+          <input className="w-[90%] bg-white mx-auto text-xs border border-[#cccccc] rounded-md p-1" placeholder="Search" />
         </div>
         <div className='col-span-8'>
-          <h1 className="text-xl bg-[#f4f4f4] border-t border-b">{servers.length} servers available</h1>
-          <div className='mt-5 border-t border-b text-sm'>
+          <h1 className="text-xl bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">{servers.length} servers available</h1>
+          <div className='mt-5 border-t border-t-[#cccccc] border-b border-b-[#cccccc] text-sm'>
             {servers.map((e: MCPServer, i: number) => {
               return (
                 <div key={i} className='mb-5'>
@@ -57,10 +57,10 @@ export default async function Home() {
           
         </div>
         <div className='col-span-1'>
-          <select className="text-xs bg-[#f4f4f4] border-t border-b">
+          <select className="text-xs bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
             <option>English</option>
           </select>
-          <div className="mt-4 p-1 bg-[#f4f4f4] border">
+          <div className="mt-4 p-1 bg-[#f4f4f4] border border-[#cccccc]">
             <h3 className="text-xs font-bold mb-2">Server count</h3>
             <D3LineChart data={[17, 26]} height={50} />
           </div>
