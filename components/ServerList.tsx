@@ -19,7 +19,7 @@ interface MCPServer {
 export default function ServerList({ list, filter, customFilter }: { list: MCPServer[], filter?: string, customFilter?: { streamableHttp?: boolean, sse?: boolean, localOnly?: boolean }}) {
     return (
         <div>
-          <p>{filter}</p>
+            {filter && filter?.length > 0 ? <p>Search: {filter}</p> : null}
             {list.map((item: MCPServer, index: number) => (
                 <div key={index} className='mb-5'>
                     <p className='font-bold'>{item.name}</p>
