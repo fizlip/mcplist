@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ServerList from './ServerList';
 
 interface Remote {
@@ -19,10 +19,13 @@ interface MCPServer {
   repository: Repository;
 }
 
-export default function SearchableServerList({ servers }: { servers: MCPServer[] }) {
+export default function SearchableServerList({ servers, status, latency }: { servers: MCPServer[], status: string, latency: number }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const [filter, setFilter] = useState({streamableHttp: false, sse: false, localOnly: false})
+
+  const [currentStatus, setCurrentStatus] = useState(status);
+  const [currentLatency, setCurrentLatency] = useState(latency);
 
   let filteredServers = servers.filter(server =>
     server.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -40,6 +43,11 @@ export default function SearchableServerList({ servers }: { servers: MCPServer[]
   if(filter.localOnly){
     filteredServers = filteredServers.filter(server => !server.remotes || server.remotes.length === 0);
   }
+
+  useEffect(() => {
+    setCurrentStatus(status);
+    setCurrentLatency(latency);
+  }, [status, latency]);
 
   return (
     <>
@@ -83,6 +91,20 @@ export default function SearchableServerList({ servers }: { servers: MCPServer[]
         <h1 className="text-xl bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
           {filteredServers.length} servers available
           {searchTerm && ` (filtered from ${servers.length})`}
+          <div className='flex items-center gap-4'>
+            <div className='flex items-center'>
+              <p className="text-xs ">API Status: </p>
+              <p className={`text-xs font-bold ${currentStatus === 'ONLINE' ? 'text-green-600' : 'text-red-600'}`}>
+                {currentStatus}
+              </p>
+            </div>
+            <div className='flex items-center'>
+              <p className="text-xs ">Latency: </p>
+              <p className="text-xs font-bold text-blue-600">
+                {currentLatency}ms
+              </p>
+            </div>
+          </div>
         </h1>
         <div className='mt-5 border-t border-t-[#cccccc] border-b border-b-[#cccccc] text-sm'>
           <ServerList list={filteredServers} filter={searchTerm} customFilter={filter} />
