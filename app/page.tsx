@@ -18,7 +18,7 @@ interface MCPServer {
   repository: Repository;
 }
 
-async function getServers(): Promise<{ servers: MCPServer[], status: 'ONLINE' | 'OFFLINE', latency: number }> {
+async function getServers(): Promise<{ servers: MCPServer[], status: number | 'ERROR', latency: number }> {
   const startTime = performance.now();
   
   try {
@@ -31,21 +31,21 @@ async function getServers(): Promise<{ servers: MCPServer[], status: 'ONLINE' | 
     const latency = Math.round(endTime - startTime);
     
     if (response.status === 500) {
-      return { servers: [], status: 'OFFLINE', latency };
+      return { servers: [], status: 500, latency };
     }
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      return { servers: [], status: response.status, latency };
     }
     
     console.log("data: ", response)
     const data = await response.json();
-    return { servers: data.servers || [], status: 'ONLINE', latency };
+    return { servers: data.servers || [], status: response.status, latency };
   } catch (error) {
     const endTime = performance.now();
     const latency = Math.round(endTime - startTime);
     console.error('Error fetching servers:', error);
-    return { servers: [], status: 'OFFLINE', latency };
+    return { servers: [], status: 'ERROR', latency };
   }
 }
 

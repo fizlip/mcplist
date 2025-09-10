@@ -19,7 +19,7 @@ interface MCPServer {
   repository: Repository;
 }
 
-export default function SearchableServerList({ servers, status, latency }: { servers: MCPServer[], status: string, latency: number }) {
+export default function SearchableServerList({ servers, status, latency }: { servers: MCPServer[], status: number | 'ERROR', latency: number }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const [filter, setFilter] = useState({streamableHttp: false, sse: false, localOnly: false})
@@ -94,7 +94,11 @@ export default function SearchableServerList({ servers, status, latency }: { ser
           <div className='flex items-center gap-4'>
             <div className='flex items-center'>
               <p className="text-xs ">API Status: </p>
-              <p className={`text-xs font-bold ${currentStatus === 'ONLINE' ? 'text-green-600' : 'text-red-600'}`}>
+              <p className={`text-xs font-bold ${
+                currentStatus === 200 ? 'text-green-600' : 
+                currentStatus === 'ERROR' ? 'text-red-600' : 
+                'text-red-600'
+              }`}>
                 {currentStatus}
               </p>
             </div>
