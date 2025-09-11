@@ -1,6 +1,5 @@
 import SearchableServerList from '@/components/SearchableServerList';
 import D3LineChart from '../components/D3LineChart';
-import { Github } from 'lucide';
 
 interface Remote {
   type: string;
@@ -18,7 +17,7 @@ interface MCPServer {
   repository: Repository;
 }
 
-async function getServers(): Promise<{ servers: MCPServer[], status: number | 'ERROR', latency: number }> {
+async function getServers(): Promise<{ servers: MCPServer[], status: number | 'ERROR', latency: number, cursor: string }> {
   const startTime = performance.now();
   
   try {
@@ -26,36 +25,37 @@ async function getServers(): Promise<{ servers: MCPServer[], status: number | 'E
       cache: 'force-cache', // Cache the response
       next: { revalidate: 60*5} // Revalidate five mins 
     });
-    
+
     const endTime = performance.now();
     const latency = Math.round(endTime - startTime);
     
     if (response.status === 500) {
-      return { servers: [], status: 500, latency };
+      return { servers: [], status: 500, latency, cursor: '' };
     }
     
     if (!response.ok) {
-      return { servers: [], status: response.status, latency };
+      return { servers: [], status: response.status, latency, cursor: '' };
     }
     
-    console.log("data: ", response)
+    // console.log("data: ", response)
     const data = await response.json();
-    return { servers: data.servers || [], status: response.status, latency };
+    return { servers: data.servers || [], status: response.status, latency, cursor: data.metadata.next_cursor };
   } catch (error) {
     const endTime = performance.now();
     const latency = Math.round(endTime - startTime);
     console.error('Error fetching servers:', error);
-    return { servers: [], status: 'ERROR', latency };
+    return { servers: [], status: 'ERROR', latency, cursor: '' };
   }
 }
 
 export default async function Home() {
-  const { servers, status, latency } = await getServers();
+  const { servers, status, latency, cursor } = await getServers();
+  const TOTAL_SERVER_COUNT:number = 161;
 
   return (
     <div className="flex w-[90vw] sm:w-[75vw] mx-auto mt-5 mb-5">
       <main className="grid grid-cols-12 gap-5">
-        <SearchableServerList servers={servers} status={status} latency={latency} />
+        <SearchableServerList cachedServers={servers} status={status} latency={latency} ocursor={cursor} totalServerCount={TOTAL_SERVER_COUNT}/>
         <div className='hidden sm:block col-span-1'>
           <select className="text-xs bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
             <option>English</option>
@@ -64,7 +64,7 @@ export default async function Home() {
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xs font-bold">Server count</h3>
             </div>
-            <D3LineChart data={[27, 46, 49, 51]} height={50} />
+            <D3LineChart data={[49, 51, 149, 161]} height={50} />
           </div>
         </div>
         <a className='flex text-xs underline fixed bottom-2 right-2' target="_blank" href="https://github.com/fizlip/mcplist">github</a>
