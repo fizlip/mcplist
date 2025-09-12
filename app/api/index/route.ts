@@ -20,7 +20,13 @@ export async function GET(request: Request) {
     const lastEvaluatedKey = searchParams.get('lastKey') ? JSON.parse(searchParams.get('lastKey')!) : undefined;
 
     // Basic scan parameters
-    const scanParams: any = {
+    const scanParams: {
+      TableName: string;
+      Limit?: number;
+      ExclusiveStartKey?: Record<string, string | number | boolean>;
+      FilterExpression?: string;
+      ExpressionAttributeValues?: Record<string, string | number | boolean>;
+    } = {
       TableName: tableName,
     };
 

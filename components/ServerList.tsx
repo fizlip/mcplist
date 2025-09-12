@@ -18,7 +18,7 @@ interface MCPServer {
   repository: Repository;
 }
 
-export default function ServerList({ getNextPage, list, filter, customFilter, defaultPageSize, totalServerCount }: { getNextPage: () => void, list: MCPServer[], filter?: string, customFilter?: { streamableHttp?: boolean, sse?: boolean, localOnly?: boolean }, defaultPageSize: number, totalServerCount: number }) {
+export default function ServerList({ getNextPage, list, filter, defaultPageSize, totalServerCount }: { getNextPage: () => void, list: MCPServer[], filter?: string, customFilter?: { streamableHttp?: boolean, sse?: boolean, localOnly?: boolean }, defaultPageSize: number, totalServerCount: number }) {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(defaultPageSize);
 
