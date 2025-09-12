@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.887.0",
+    "@aws-sdk/lib-dynamodb": "^3.887.0",
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
     "lucide": "^0.542.0",

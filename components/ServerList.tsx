@@ -50,7 +50,7 @@ export default function ServerList({ getNextPage, list, filter, customFilter, de
                     <p className='font-bold'>{item.name}</p>
                     <a className='text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.repository.url}</a>
                     <p>{item.description}</p>
-                    <div>{item.remotes?.map((x: Remote, i: number) => <div key={i}><span>{x.type}</span>: <a className='text-blue-500 underline' href={x.url} target="_blank" rel="noopener noreferrer">{x.url}</a></div>)}</div>
+                    <div>{Array.isArray(item.remotes) ? item.remotes.map((x: Remote, i: number) => <div key={i}><span>{x.type}</span>: <a className='text-blue-500 underline' href={x.url} target="_blank" rel="noopener noreferrer">{x.url}</a></div>) : null}</div>
                 </div>
             ))}
             <div className='flex justify-center gap-2 bg-[#f4f4f4] border-b border-b-[#cccccc] border-t border-t-[#cccccc]'>

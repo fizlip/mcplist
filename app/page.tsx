@@ -21,7 +21,7 @@ async function getServers(): Promise<{ servers: MCPServer[], status: number | 'E
   const startTime = performance.now();
   
   try {
-    const response = await fetch("https://registry.modelcontextprotocol.io/v0/servers?limit=100", {
+    const response = await fetch("http://localhost:3000/api/index", {
       cache: 'force-cache', // Cache the response
       next: { revalidate: 60*5} // Revalidate five mins 
     });
@@ -39,7 +39,7 @@ async function getServers(): Promise<{ servers: MCPServer[], status: number | 'E
     
     // console.log("data: ", response)
     const data = await response.json();
-    return { servers: data.servers || [], status: response.status, latency, cursor: data.metadata.next_cursor };
+    return { servers: data.servers || [], status: response.status, latency, cursor: "" };
   } catch (error) {
     const endTime = performance.now();
     const latency = Math.round(endTime - startTime);
@@ -50,7 +50,7 @@ async function getServers(): Promise<{ servers: MCPServer[], status: number | 'E
 
 export default async function Home() {
   const { servers, status, latency, cursor } = await getServers();
-  const TOTAL_SERVER_COUNT:number = 195;
+  const TOTAL_SERVER_COUNT:number = servers.length;
 
   return (
     <div className="flex w-[90vw] sm:w-[75vw] mx-auto mt-5 mb-5">
@@ -66,7 +66,7 @@ export default async function Home() {
             </div>
             <D3LineChart data={[49, 51, 149, 161, 195]} height={50} />
           </div>
-          <p className="text-xs bg-blue-100 p-1">The servers are indexed every hour.</p>
+          <p className="text-xs bg-blue-100 p-1 border border-[#cccccc] mt-5">Servers are indexed every hour.</p>
         </div>
         <a className='flex text-xs underline fixed bottom-2 right-2' target="_blank" href="https://github.com/fizlip/mcplist">github</a>
       </main>

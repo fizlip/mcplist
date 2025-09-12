@@ -53,15 +53,21 @@ export default function SearchableServerList({ cachedServers, status, latency, o
   }
 
   if(filter.streamableHttp){
-    filteredServers = filteredServers.filter(server => server.remotes?.some(remote => remote.type === 'streamable-http'));
+    filteredServers = filteredServers.filter(server => 
+      Array.isArray(server.remotes) && server.remotes.some(remote => remote.type === 'streamable-http')
+    );
   }
 
   if(filter.sse){
-    filteredServers = filteredServers.filter(server => server.remotes?.some(remote => remote.type == "sse"));
+    filteredServers = filteredServers.filter(server => 
+      Array.isArray(server.remotes) && server.remotes.some(remote => remote.type === "sse")
+    );
   }
 
   if(filter.localOnly){
-    filteredServers = filteredServers.filter(server => !server.remotes || server.remotes.length === 0);
+    filteredServers = filteredServers.filter(server => 
+      !Array.isArray(server.remotes) || server.remotes.length === 0
+    );
   }
 
   useEffect(() => {
@@ -105,6 +111,24 @@ export default function SearchableServerList({ cachedServers, status, latency, o
                 />
                 <label className='ml-2'>Local</label>
             </div>
+        </div>
+        <div className='mt-5 text-xs ml-5 mr-5'>
+          <p>Choose a category</p>
+          <div>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Local Tools</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Agentic Coding</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Data Access & Data Analysis</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Internet & Browser Use</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Communication</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Voice & Audio</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Gateways</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Education</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Finance & Business</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>LLM Enhancements</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Medical</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Graphics & Design</p>
+            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Utilities</p>
+          </div>
         </div>
       </div>
       <div className='col-span-12 sm:col-span-7'>
