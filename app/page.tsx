@@ -21,7 +21,7 @@ async function getServers(): Promise<{ servers: MCPServer[], status: number | 'E
   const startTime = performance.now();
   
   try {
-    const response = await fetch("http://localhost:3000/api/index", {
+    const response = await fetch("https://spekter.io/api/index", {
       cache: 'force-cache', // Cache the response
       next: { revalidate: 60*5} // Revalidate five mins 
     });
