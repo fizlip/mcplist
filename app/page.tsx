@@ -64,7 +64,7 @@ export default async function Home() {
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xs font-bold">Server count</h3>
             </div>
-            <D3LineChart data={[49, 51, 149, 161, 195]} height={50} />
+            <D3LineChart data={[51, 149, 161, 195, 198]} height={50} />
           </div>
           <p className="text-xs bg-blue-100 p-1 border border-[#cccccc] mt-5">Servers are indexed every hour.</p>
         </div>

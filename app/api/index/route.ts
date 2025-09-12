@@ -4,10 +4,10 @@ import { DynamoDBDocumentClient, ScanCommand } from "@aws-sdk/lib-dynamodb";
 // Initialize DynamoDB client
 const client = new DynamoDBClient({
   region: process.env.AWS_REGION || "us-east-1",
-  // Credentials will be automatically loaded from:
-  // 1. Environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-  // 2. IAM roles (if running on EC2/Lambda)
-  // 3. AWS credentials file (~/.aws/credentials)
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_KEY!
+  }
 });
 
 const docClient = DynamoDBDocumentClient.from(client);
