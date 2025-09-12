@@ -50,13 +50,13 @@ async function getServers(): Promise<{ servers: MCPServer[], status: number | 'E
 
 export default async function Home() {
   const { servers, status, latency, cursor } = await getServers();
-  const TOTAL_SERVER_COUNT:number = 161;
+  const TOTAL_SERVER_COUNT:number = 195;
 
   return (
     <div className="flex w-[90vw] sm:w-[75vw] mx-auto mt-5 mb-5">
       <main className="grid grid-cols-12 gap-5">
         <SearchableServerList cachedServers={servers} status={status} latency={latency} ocursor={cursor} totalServerCount={TOTAL_SERVER_COUNT}/>
-        <div className='hidden sm:block col-span-1'>
+        <div className='hidden sm:block col-span-2'>
           <select className="text-xs bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
             <option>English</option>
           </select>
@@ -64,8 +64,9 @@ export default async function Home() {
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xs font-bold">Server count</h3>
             </div>
-            <D3LineChart data={[49, 51, 149, 161]} height={50} />
+            <D3LineChart data={[49, 51, 149, 161, 195]} height={50} />
           </div>
+          <p className="text-xs bg-blue-100 p-1">The servers are indexed every hour.</p>
         </div>
         <a className='flex text-xs underline fixed bottom-2 right-2' target="_blank" href="https://github.com/fizlip/mcplist">github</a>
       </main>

@@ -107,7 +107,7 @@ export default function SearchableServerList({ cachedServers, status, latency, o
             </div>
         </div>
       </div>
-      <div className='col-span-12 sm:col-span-8'>
+      <div className='col-span-12 sm:col-span-7'>
         <h1 className="text-xl bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
           {totalServerCount} servers available
           {searchTerm && ` (filtered from ${servers.length})`}
