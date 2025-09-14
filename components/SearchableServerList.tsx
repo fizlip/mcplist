@@ -91,18 +91,6 @@ export default function SearchableServerList({ cachedServers, status, latency, o
         />
         <h1 className="flex text-base">
           {filteredServers.length} servers found in {currentLatency} ms
-          <div className='ml-auto flex items-center gap-4'>
-            <div className='flex items-center'>
-              <p className="text-xs ">API Status: </p>
-              <p className={`text-xs font-bold ${
-                currentStatus === 200 ? '' : 
-                currentStatus === 'ERROR' ? '' : 
-                'text-red-600'
-              }`}>
-                {currentStatus}
-              </p>
-            </div>
-          </div>
         </h1>
         <div className='mt-5 text-sm'>
           <ServerList getNextPage={() => getNextPage()} list={filteredServers} filter={searchTerm} customFilter={filter} defaultPageSize={100} totalServerCount={filteredServers.length}/>
