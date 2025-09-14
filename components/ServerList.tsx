@@ -36,11 +36,21 @@ export default function ServerList({ getNextPage, list, filter, defaultPageSize,
     return (
         <div>
             {list.slice((page - 1) * pageSize, page * pageSize).map((item: MCPServer, index: number) => (
+              <div key={index}>
+              {index == 0 && totalServerCount == 271?
+                <div key={index} className='mb-5'>
+                  <p className='text-xs font-bold'>Featured</p>
+                  <a className='text-base text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.name.split("/")[1]}</a>
+                  <p>{item.description}</p>
+                </div>
+              :
                 <div key={index} className='mb-5'>
                     <a className='text-base text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.name.split("/")[1]}</a>
                     <p>{item.description}</p>
                 </div>
-            ))}
+              }
+              </div>)
+            )}
             <div className='flex justify-center gap-2 bg-[#f4f4f4] border-b border-b-[#cccccc] border-t border-t-[#cccccc]'>
               <button 
                 className="hover:underline hover:bg-blue-100 hover:font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" 
