@@ -80,31 +80,27 @@ export default function SearchableServerList({ cachedServers, status, latency, o
   return (
     <>
       <div className='col-span-12 sm:col-span-2 bg-white flex flex-col'>
+        <p className='text-xl font-serif'>Spekter</p>
       </div>
       <div className='col-span-12 sm:col-span-7'>
-        <h1 className="text-xl bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
-          {totalServerCount} servers available
+        <input className='w-[100%] border border-[#cccccc] p-2 pl-5 mb-5 rounded-full bg-[#f4f4f4]'/>
+        <h1 className="flex text-base">
+          {totalServerCount} servers found in {currentLatency} ms
           {searchTerm && ` (filtered from ${servers.length})`}
-          <div className='flex items-center gap-4'>
+          <div className='ml-auto flex items-center gap-4'>
             <div className='flex items-center'>
               <p className="text-xs ">API Status: </p>
               <p className={`text-xs font-bold ${
-                currentStatus === 200 ? 'text-green-600' : 
-                currentStatus === 'ERROR' ? 'text-red-600' : 
+                currentStatus === 200 ? '' : 
+                currentStatus === 'ERROR' ? '' : 
                 'text-red-600'
               }`}>
                 {currentStatus}
               </p>
             </div>
-            <div className='flex items-center'>
-              <p className="text-xs ">Latency: </p>
-              <p className="text-xs font-bold text-blue-600">
-                {currentLatency}ms
-              </p>
-            </div>
           </div>
         </h1>
-        <div className='mt-5 border-t border-t-[#cccccc] border-b border-b-[#cccccc] text-sm'>
+        <div className='mt-5 text-sm'>
           <ServerList getNextPage={() => getNextPage()} list={filteredServers} filter={searchTerm} customFilter={filter} defaultPageSize={100} totalServerCount={totalServerCount}/>
         </div>
       </div>

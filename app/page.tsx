@@ -57,16 +57,16 @@ export default async function Home() {
       <main className="grid grid-cols-12 gap-5">
         <SearchableServerList cachedServers={servers} status={status} latency={latency} ocursor={cursor} totalServerCount={TOTAL_SERVER_COUNT}/>
         <div className='hidden sm:block col-span-2'>
-          <select className="text-xs bg-[#f4f4f4] border-t border-t-[#cccccc] border-b border-b-[#cccccc]">
+          <select className="text-xs bg-[#f4f4f4] border border-[#cccccc] rounded p-1">
             <option>English</option>
           </select>
-          <div className="mt-4 p-1 bg-[#f4f4f4] border border-[#cccccc]">
+          <div className="mt-4 p-2 rounded bg-[#f4f4f4] border border-[#cccccc]">
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xs font-bold">Server count</h3>
             </div>
             <D3LineChart data={[161, 195, 198, 217, 267]} height={50} />
           </div>
-          <p className="text-xs bg-blue-100 p-1 border border-[#cccccc] mt-5">Servers are indexed every hour.</p>
+          <p className="text-xs bg-blue-100 p-1 border border-[#cccccc] mt-5 rounded">Servers are indexed every hour.</p>
         </div>
         <a className='flex text-xs underline fixed bottom-2 right-2' target="_blank" href="https://github.com/fizlip/mcplist">github</a>
       </main>

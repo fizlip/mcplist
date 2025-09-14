@@ -35,16 +35,6 @@ export default function ServerList({ getNextPage, list, filter, defaultPageSize,
 
     return (
         <div>
-            <div className="flex items-right bg-[#f4f4f4] border-b border-b-[#cccccc]">
-              <p className="">Page size:</p> 
-              <select className="text-right font-bold" value={pageSize} onChange={(e) => setPageSize(Number(e.target.value))}>
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-            {filter && filter?.length > 0 ? <p>Search: {filter}</p> : null}
             {list.slice((page - 1) * pageSize, page * pageSize).map((item: MCPServer, index: number) => (
                 <div key={index} className='mb-5'>
                     <a className='text-base text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.name.split("/")[1]}</a>
