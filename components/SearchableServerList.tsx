@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ServerList from './ServerList';
+import ItemButton from './ItemButton';
 
 interface Remote {
   type: string;
@@ -114,20 +115,20 @@ export default function SearchableServerList({ cachedServers, status, latency, o
         </div>
         <div className='mt-5 text-xs ml-5 mr-5'>
           <p>Choose a category</p>
-          <div>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Local Tools</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Agentic Coding</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Data Access & Data Analysis</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Internet & Browser Use</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Communication</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Voice & Audio</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Gateways</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Education</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Finance & Business</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>LLM Enhancements</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Medical</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Graphics & Design</p>
-            <p className='text-blue-500 underline hover:bg-blue-100 p-1 hover:cursor-pointer'>Utilities</p>
+          <div className='flex flex-wrap'>
+            <ItemButton label="Local Tools" onClick={() => setFilter({ ...filter, localOnly: true })}/>
+            <ItemButton label="Agentic Coding" onClick={() => null}/>
+            <ItemButton label="Data Access & Data Analysis" onClick={() => null}/>
+            <ItemButton label="Internet & Browser Use" onClick={() => null}/>
+            <ItemButton label="Communication" onClick={() => null}/>
+            <ItemButton label="Voice & Audio" onClick={() => null}/>
+            <ItemButton label="Gateways" onClick={() => null}/>
+            <ItemButton label="Education" onClick={() => null}/>
+            <ItemButton label="Finance & Business" onClick={() => null}/>
+            <ItemButton label="LLM Enhancements" onClick={() => null}/>
+            <ItemButton label="Medical" onClick={() => null}/>
+            <ItemButton label="Graphics & Design" onClick={() => null}/>
+            <ItemButton label="Utilities" onClick={() => null}/>
           </div>
         </div>
       </div>
