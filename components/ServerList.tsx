@@ -47,9 +47,8 @@ export default function ServerList({ getNextPage, list, filter, defaultPageSize,
             {filter && filter?.length > 0 ? <p>Search: {filter}</p> : null}
             {list.slice((page - 1) * pageSize, page * pageSize).map((item: MCPServer, index: number) => (
                 <div key={index} className='mb-5'>
-                    <p className='font-bold'>{item.name}</p>
+                    <a className='text-base text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.name}</a>
                     <p>{item.description}</p>
-                    <a className='text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.repository.url}</a>
                 </div>
             ))}
             <div className='flex justify-center gap-2 bg-[#f4f4f4] border-b border-b-[#cccccc] border-t border-t-[#cccccc]'>
