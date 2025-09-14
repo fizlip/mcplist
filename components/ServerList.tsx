@@ -20,7 +20,7 @@ interface MCPServer {
 
 export default function ServerList({ getNextPage, list, filter, defaultPageSize, totalServerCount }: { getNextPage: () => void, list: MCPServer[], filter?: string, customFilter?: { streamableHttp?: boolean, sse?: boolean, localOnly?: boolean }, defaultPageSize: number, totalServerCount: number }) {
     const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(defaultPageSize);
+    const [pageSize, setPageSize] = useState(100);
 
     // Calculate total pages based on total server count and page size
     const totalPages = Math.ceil(totalServerCount / pageSize);
@@ -37,7 +37,7 @@ export default function ServerList({ getNextPage, list, filter, defaultPageSize,
         <div>
             <div className="flex items-right bg-[#f4f4f4] border-b border-b-[#cccccc]">
               <p className="">Page size:</p> 
-              <select className="text-right font-bold" onChange={(e) => setPageSize(Number(e.target.value))}>
+              <select className="text-right font-bold" value={pageSize} onChange={(e) => setPageSize(Number(e.target.value))}>
                 <option value="10">10</option>
                 <option value="30">30</option>
                 <option value="50">50</option>
@@ -47,7 +47,7 @@ export default function ServerList({ getNextPage, list, filter, defaultPageSize,
             {filter && filter?.length > 0 ? <p>Search: {filter}</p> : null}
             {list.slice((page - 1) * pageSize, page * pageSize).map((item: MCPServer, index: number) => (
                 <div key={index} className='mb-5'>
-                    <a className='text-base text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.name}</a>
+                    <a className='text-base text-blue-500 underline' href={item.repository.url} target="_blank" rel="noopener noreferrer">{item.name.split("/")[1]}</a>
                     <p>{item.description}</p>
                 </div>
             ))}
